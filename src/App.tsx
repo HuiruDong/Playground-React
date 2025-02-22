@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import { useRef } from 'react'
+// import { transform } from '@babel/standalone'; // babel 的浏览器版本，可以实时将 tsx 编译成 js
+// import type { PluginObj } from '@babel/core';
 
-function App() {
-  const [count, setCount] = useState(0)
+// const App: React.FC = () => {
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+//   const utils = `
+//     function add(a, b) {
+//       return a + b;
+//     }
+//     export { add };
+//   `;
+
+//   /**
+//    * 对于 import 来说，直接在浏览器中运行是你不可能的，我们需要动态引入这些依赖
+//    * 要不就是学 vite 的 dev server 那样根据 moduleId 返回编译过后的内容，但是作为一个页面，性价比太低
+//    * 还可以把一段 JS 代码，用 URL.createObjectURL 和 new Blob 的方式变为一个 url
+//    *  URL.createObjectURL(new Blob([code], { type: 'application/javascript' }))
+//    */
+//   const url = URL.createObjectURL(new Blob([utils], { type: 'application/javascript' }));
+
+//   // 对于 react 和 react-dom 来说可以用 import maps 来实现呢，原理就是用了 esm.sh 提供的 cdn 服务
+
+//   const code = `import { add } from './utils.ts'; console.log(add(2, 3));`
+
+//   const transformImportSourcePlugin: PluginObj = {
+//     visitor: {
+//       ImportDeclaration(path) {
+//         path.node.source.value = url;
+//       }
+//     },
+//   }
+
+//   const onClick = () => {
+//     const res = transform(code, {
+//       presets: ['react', 'typescript'],
+//       filename: 'yi.ts',
+//       plugins: [transformImportSourcePlugin]
+//     })
+
+
+//     console.log(res.code)
+//   }
+
+//   return <div>
+//     <button onClick={onClick}>编译</button>
+//   </div>
+// }
+
+// export default App
+
+
+import ReactPlayground from './ReactPlayground';
+import './App.scss'
+
+const App:React.FC = () => {
+  return <ReactPlayground />
 }
 
 export default App
