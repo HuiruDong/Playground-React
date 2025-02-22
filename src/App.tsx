@@ -38,7 +38,6 @@
 //       plugins: [transformImportSourcePlugin]
 //     })
 
-
 //     console.log(res.code)
 //   }
 
@@ -49,12 +48,16 @@
 
 // export default App
 
-
 import ReactPlayground from './ReactPlayground';
-import './App.scss'
+import './App.scss';
+import { PlaygroundProvider } from './ReactPlayground/PlaygroundProvider';
 
-const App:React.FC = () => {
-  return <ReactPlayground />
-}
+const App: React.FC = () => {
+  return (
+    <PlaygroundProvider>
+      <ReactPlayground />
+    </PlaygroundProvider>
+  );
+};
 
-export default App
+export default App;

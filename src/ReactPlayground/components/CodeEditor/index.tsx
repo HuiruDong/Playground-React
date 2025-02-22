@@ -1,24 +1,25 @@
 import FileNameList from '../FileNameList';
 import Editor from '../Editor';
-import type { EditorProps } from '../Editor';
+import { useContext } from 'react';
+import { PlaygroundContext } from '../../PlaygroundContext';
+import { debounce } from 'lodash-es';
 
 const CodeEditor: React.FC = () => {
+    const { selectedFileName, files, setFiles } = useContext(PlaygroundContext);
 
-    const file: EditorProps['file'] = {
-        name: 'yi.tsx',
-        value: `import lodash from "lodash";\n\nconst a = <div>guang</div>`,
-        language: 'typescript'
-    }
+    const file = files[selectedFileName];
 
+    const onEditorChange = (value?: string) => {
+        files[file.name].value = value!;
+        setFiles({ ...files });
+    };
 
-    function onEditorChange() {
-        console.log(...arguments);
-    }
+    return (
+        <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <FileNameList />
+            <Editor file={file} onChnage={debounce(onEditorChange, 500)} />
+        </div>
+    );
+};
 
-    return <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <FileNameList />
-        <Editor file={file} onChnage={onEditorChange} />
-    </div>
-}
-
-export default CodeEditor
+export default CodeEditor;
