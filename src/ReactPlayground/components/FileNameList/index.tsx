@@ -4,8 +4,13 @@ import { FileNameItem } from './FileNameItem';
 import styles from './index.module.scss';
 
 const FileNameList: React.FC = () => {
-    const { files, selectedFileName, setSelectedFileName } = useContext(PlaygroundContext);
+    const { files, selectedFileName, setSelectedFileName, updateFileName } = useContext(PlaygroundContext);
     const [tabs, setTabs] = useState(['']);
+
+    const handleEditComplete = (name: string, preName:string) => {
+        updateFileName(preName,name)
+        setSelectedFileName(name)
+    }
 
     useEffect(() => {
         setTabs(Object.keys(files));
@@ -19,6 +24,7 @@ const FileNameList: React.FC = () => {
                     value={tab}
                     actived={selectedFileName === tab}
                     onClick={() => setSelectedFileName(tab)}
+                    onEditComplete={(name: string) => handleEditComplete(name, tab)}
                 />
             ))}
         </div>
