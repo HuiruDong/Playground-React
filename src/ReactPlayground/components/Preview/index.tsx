@@ -5,17 +5,17 @@ import { IMPORT_MAP_FILE_NAME } from '../../files';
 import iframeRaw from './iframe.html?raw';
 import Message from '../Message';
 
-type MessageData =  {
+type MessageData = {
     data: {
-      type: string
-      message: string
-    }
-}
+        type: string;
+        message: string;
+    };
+};
 
 const Preview: React.FC = () => {
     const { files } = useContext(PlaygroundContext);
     const [compiledCode, setCompiledCode] = useState('');
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
 
     const getIframeUrl = () => {
         const res = iframeRaw
@@ -33,12 +33,11 @@ const Preview: React.FC = () => {
     const [iframeUrl, setIframeUrl] = useState(getIframeUrl());
 
     const handleMessage = (msg: MessageData) => {
-        const {type, message} = msg.data
+        const { type, message } = msg.data;
         if (type === 'ERROR') {
-            setError(message)
+            setError(message);
         }
-
-    }
+    };
 
     useEffect(() => {
         setIframeUrl(getIframeUrl());
@@ -50,11 +49,11 @@ const Preview: React.FC = () => {
 
     useEffect(() => {
         // 监听 iframe 传递过来的 error message
-        window.addEventListener('message', handleMessage)
+        window.addEventListener('message', handleMessage);
         return () => {
-            window.removeEventListener('message', handleMessage)
-        }
-    }, [])
+            window.removeEventListener('message', handleMessage);
+        };
+    }, []);
 
     return (
         <div style={{ height: '100%' }}>

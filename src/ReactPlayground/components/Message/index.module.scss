@@ -16,25 +16,25 @@
     border-radius: 6px;
 
     border-color: var(--color);
-  
+
     &.error {
-      --color: #f56c6c;
-      --bg-color: #fef0f0;
+        --color: #f56c6c;
+        --bg-color: #fef0f0;
     }
-  
+
     &.warning {
-      --color: #e6a23c;
-      --bg-color: #fdf6ec;
+        --color: #e6a23c;
+        --bg-color: #fdf6ec;
     }
 }
-  
+
 pre {
     padding: 12px 20px;
     margin: 0;
     overflow: auto;
     white-space: break-spaces;
 }
-  
+
 .dismiss {
     position: absolute;
     top: 2px;
