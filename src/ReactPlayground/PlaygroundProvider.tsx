@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import { useState } from 'react';
 import { fileName2Language } from './utils';
-import type { Files } from './PlaygroundContext';
+import type { Files, Theme } from './PlaygroundContext';
 import { PlaygroundContext } from './PlaygroundContext';
 import { initFiles } from './files';
 
@@ -9,6 +9,7 @@ export const PlaygroundProvider = (props: PropsWithChildren) => {
     const { children } = props;
     const [files, setFiles] = useState<Files>(initFiles); // 存储文件数据，文件名是 key，文件内容是 value
     const [selectedFileName, setSelectedFileName] = useState('App.tsx');
+    const [theme, setTheme] = useState<Theme>('light');
 
     const addFile = (name: string) => {
         files[name] = {
@@ -50,6 +51,8 @@ export const PlaygroundProvider = (props: PropsWithChildren) => {
                 addFile,
                 removeFile,
                 updateFileName,
+                theme,
+                setTheme,
             }}
         >
             {children}
