@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
 
 export interface FileNameItemProps {
@@ -7,25 +7,32 @@ export interface FileNameItemProps {
   actived: boolean;
   onClick: () => void;
   onEditComplete: (name: string) => void;
+  creating: boolean;
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
-  const { value, actived = false, onClick, onEditComplete } = props;
-  const [editing, setEditing] = useState(false);
+  const { value, actived = false, onClick, onEditComplete, creating } = props;
+  const [editing, setEditing] = useState(creating);
   const inputRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState(value);
 
   const handleDoubleClick = () => {
-    setEditing(true)
+    setEditing(true);
     setTimeout(() => {
-        inputRef?.current?.focus()
+      inputRef?.current?.focus();
     }, 0);
-  }
+  };
 
   const handleBlur = () => {
-    setEditing(false)
-    onEditComplete(name)
-  }
+    setEditing(false);
+    onEditComplete(name);
+  };
+
+  useEffect(() => {
+    if (creating) {
+      inputRef?.current?.focus();
+    }
+  }, [creating]);
 
   return (
     <div
