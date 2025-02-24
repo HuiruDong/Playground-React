@@ -12,5 +12,11 @@
     <script type="module" id="appSrc"></script>
     <div id="root"></div>
 </body>
+<script>
+    // 监听错误 post 出去给父窗口
+    window.addEventListener('error', (evt) => {
+        window.parent.postMessage({type: 'ERROR', message: evt.message})
+    })
+</script>
 
 </html>
